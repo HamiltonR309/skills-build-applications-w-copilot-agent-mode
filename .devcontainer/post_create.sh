@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+#!/bin/bash
+# This script is run after the container is created.
+# It is used to install any additional dependencies or perform any setup tasks.
+
+>>>>>>> 67fc749 (Initial commit)
 wget -qO - https://pgp.mongodb.com/server-6.0.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/mongodb-server-6.0.gpg > /dev/null
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 sudo apt-get update

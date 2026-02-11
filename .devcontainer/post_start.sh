@@ -1,3 +1,8 @@
+#!/bin/bash
+# This script is run after the container starts up.
+
+set -euo pipefail
+
 die() {
   echo "ERROR: $@" >&2
   exit 1
