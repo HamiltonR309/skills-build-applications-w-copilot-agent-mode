@@ -37,8 +37,12 @@ router.register(r'activities', views.ActivityViewSet)
 router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboard', views.LeaderboardEntryViewSet)
 
+from django.views.generic import RedirectView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # redirect bare root to the API index
+    path('', RedirectView.as_view(url='/api/', permanent=False)),
     path('api/', views.api_root, name='api_root'),
     path('api/', include(router.urls)),
 ]
