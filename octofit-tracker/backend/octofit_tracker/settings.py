@@ -27,6 +27,9 @@ DEBUG = True
 
 import os
 
+# use the custom user model defined in octofit_tracker.models
+AUTH_USER_MODEL = 'octofit_tracker.User'
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # allow codespace host if running inside a GitHub Codespace
 if os.environ.get('CODESPACE_NAME'):
@@ -52,14 +55,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
