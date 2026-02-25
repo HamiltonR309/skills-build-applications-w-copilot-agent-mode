@@ -3,16 +3,25 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import User, Team, Activity, Workout, LeaderboardEntry
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, WorkoutSerializer, LeaderboardEntrySerializer
+import os
 
 @api_view(['GET'])
 def api_root(request, format=None):
+    """Return a small index of available API endpoints using the correct base URL."""
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    if codespace_name:
+        base = f"https://{codespace_name}-8000.app.github.dev/api"
+    else:
+        base = "http://localhost:8000/api"
+
     return Response({
-        'users': '/users/',
-        'teams': '/teams/',
-        'activities': '/activities/',
-        'workouts': '/workouts/',
-        'leaderboard': '/leaderboard/',
+        'users': f"{base}/users/",
+        'teams': f"{base}/teams/",
+        'activities': f"{base}/activities/",
+        'workouts': f"{base}/workouts/",
+        'leaderboard': f"{base}/leaderboard/",
     })
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

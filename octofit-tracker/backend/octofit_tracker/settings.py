@@ -25,7 +25,14 @@ SECRET_KEY = 'django-insecure-p*%(ymgilwh-7b9!-)mf=8nnhu+g$s^1005whls*%&_mn^^be6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# allow codespace host if running inside a GitHub Codespace
+if os.environ.get('CODESPACE_NAME'):
+    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
+# keep wildcard to satisfy any unexpected host routing during development
+ALLOWED_HOSTS.append('*')
 
 
 # Application definition
@@ -45,6 +52,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
